@@ -7,7 +7,8 @@
     "dev": "next dev -H 0.0.0.0",
     "build": "next build",
     "prettier": "prettier -write .",
-    "lint": "next lint"
+    "lint": "next lint",
+    "devStart": "nodemon server.js"
   },
   "keywords": [],
   "author": "Vic Maree<vicmr1994@gmail.com>",
@@ -16,14 +17,23 @@
     "@chakra-ui/react": "^1.7.4",
     "@emotion/react": "^11.7.1",
     "@emotion/styled": "^11.6.0",
+    "bcrypt": "^5.0.1",
+    "ejs": "^3.1.6",
+    "express": "^4.17.2",
+    "express-flash": "0.0.2",
+    "express-session": "^1.17.2",
     "framer-motion": "^5.5.5",
     "next": "^12.0.7",
+    "passport": "^0.5.2",
+    "passport-local": "^1.0.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2"
   },
   "devDependencies": {
+    "dotenv": "^10.0.0",
     "eslint": "^8.6.0",
     "eslint-config-next": "^12.0.7",
+    "nodemon": "^2.0.15",
     "prettier": "^2.5.1"
   }
 }
