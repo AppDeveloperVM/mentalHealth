@@ -24,15 +24,21 @@ const users = [
         password: '$2b$10$vlZWCNqKHQm/f3HFLoilC.QyluW9WqAHaU3CVC6ZwCQLYDJIlmnnC'//123456
     }
 ];
-
+// Middleware
 app.set('view-engine','ejs')
+app.use(express.static(__dirname + '/public'))
 app.use(express.urlencoded({ extended: false }))
 app.use(flash())
 app.use(session({
     secret: process.env.SESSION_SECRET,
     resave: false,
-    saveUninitialized: false
+    saveUninitialized: false,
+    cookie: {
+        maxAge: 1000 * 60 * 60 * 24 // 1 day
+    }
 }))
+
+// Passport
 app.use(passport.initialize())
 app.use(passport.session())
 app.use(methodOverride('_method'))
@@ -42,7 +48,7 @@ app.get('/', checkAuthenticated, (req, res) => {
 })
 //Login
 app.get('/login', checkNotAuthenticated, (req, res) => {
-    res.render('login.ejs')
+    res.render('login.ejs', { title: "Homepage"})
 })
 
 app.post('/login', checkNotAuthenticated, passport.authenticate('local', { 
@@ -56,7 +62,16 @@ app.get('/register', checkNotAuthenticated, (req, res) => {
 })
 
 app.post('/register', checkNotAuthenticated, async (req, res) => {
+    const { name, email, password } = req.body
+    let errors = [];
+
     try {
+
+        //check required fields
+        if(!name || !email || !password) {
+            errors.push({ msg: 'Please fill in all fields'})
+            //res.redirect('/register' , { errors })
+        }
         const hashedPassword = await bcrypt.hash(req.body.password, 10);
         users.push({
             id: Date.now().toString(),
@@ -66,9 +81,10 @@ app.post('/register', checkNotAuthenticated, async (req, res) => {
         })
         res.redirect('/login')
     } catch {
-        res.redirect('/register')
+        res.render('/register' , { errors })
     }
     console.log(users)
+
 })
 
 app.delete('/logout', (req, res) => {
@@ -91,4 +107,6 @@ function checkNotAuthenticated(req, res, next) {
     next()
 }
 
-app.listen(3000)
+app.listen(3000 , () => {
+    console.log("Listening on port 3000");
+})
