@@ -4,11 +4,11 @@
   "description": "Mental's health app for Synaptiko' test",
   "main": "index.js",
   "scripts": {
-    "dev": "next dev -H 0.0.0.0",
+    "dev": "nodemon server.js",
     "build": "next build",
     "prettier": "prettier -write .",
     "lint": "next lint",
-    "devStart": "nodemon server.js"
+    "devStart": "next dev -H 0.0.0.0"
   },
   "keywords": [],
   "author": "Vic Maree<vicmr1994@gmail.com>",
@@ -25,6 +25,7 @@
     "framer-motion": "^5.5.5",
     "method-override": "^3.0.0",
     "next": "^12.0.7",
+    "next-auth": "^4.0.6",
     "passport": "^0.5.2",
     "passport-local": "^1.0.0",
     "react": "^17.0.2",
