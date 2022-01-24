@@ -1,2 +1,2 @@
 # mentalHealth
- Mental Health's app for Synpatiko 
+ Mental Health's app for Synaptiko 
