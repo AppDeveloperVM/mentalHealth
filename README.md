@@ -1,2 +1,2 @@
 # mentalHealth
- Mental Health's app for Synaptiko 
+ Mental Health's app , oriented to searching for professional help
